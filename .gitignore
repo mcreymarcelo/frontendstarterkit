@@ -58,3 +58,6 @@ typings/
 .env
 
 # End of https://www.gitignore.io/api/node,sass,macos
+
+# Local Files
+dist/

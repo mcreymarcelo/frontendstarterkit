@@ -3,7 +3,6 @@ const postcss       = require('gulp-postcss');
 const posturl       = require("postcss-url")
 const cssnext       = require('postcss-cssnext');
 const atImport      = require('postcss-import');
-const cssnano       = require('cssnano');
 const browserSync   = require('browser-sync');
 const imagemin      = require('gulp-imagemin');
 const concat        = require('gulp-concat');
@@ -11,6 +10,7 @@ const browserReport = require('postcss-browser-reporter');
 const postReporter  = require('postcss-reporter');
 const envi          = require('gulp-mode');
 const minifyjs      = require('gulp-js-minify');
+const minifycss     = require('gulp-clean-css');
 
 const paths = {
   csspath    : 'assets/css/',
@@ -37,20 +37,12 @@ gulp.task('styles', () => {
           posturl(),
           cssnext(),
           browserReport(),
-	        postReporter(),
+	        postReporter()
        ];
 
-  let  processorsProd = [
-          atImport,
-          posturl(),
-          cssnext(),
-          browserReport(),
-          postReporter(),
-          cssnano()
-       ];
-  
   return gulp.src(paths.cssmain)
-             .pipe(mode.production(postcss(processorsProd)) || postcss(processors))
+             .pipe(postcss(processors))
+             .pipe(mode.production(minifycss()))
              .pipe(gulp.dest(paths.cssdist));
     
 });

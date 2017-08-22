@@ -4,6 +4,7 @@
     "browser-sync": "^2.18.13",
     "cssnano": "^3.10.0",
     "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.7.0",
     "gulp-concat": "^2.6.1",
     "gulp-imagemin": "^3.3.0",
     "gulp-js-minify": "0.0.3",
