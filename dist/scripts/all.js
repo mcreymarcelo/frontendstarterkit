@@ -1,6 +1,1 @@
-// About Page
-const about = `This is the about page JS`;
-// Contact Page
-const contact = `This is the contact page`;
-// Main JS
-const main = `This is the main JS file`;
+eval(function(p,a,c,k,e,d){e=function(c){return c};if(!''.replace(/^/,String)){while(c--)d[c]=k[c]||c;k=[function(e){return d[e]}];e=function(){return'\\w+'};c=1};while(c--)if(k[c])p=p.replace(new RegExp('\\b'+e(c)+'\\b','g'),k[c]);return p}('3 8=`2 1 0 8 6 4`;3 7=`2 1 0 7 6`;3 5=`2 1 0 5 4 9`;',10,10,'the|is|This|const|JS|main|page|contact|about|file'.split('|'),0,{}))
