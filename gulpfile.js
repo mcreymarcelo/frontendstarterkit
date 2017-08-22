@@ -13,14 +13,14 @@ const envi          = require('gulp-mode');
 const minifyjs      = require('gulp-js-minify');
 
 const paths = {
-    csspath    : 'assets/css/',
-    cssmain    : 'assets/css/main.css',
-    cssdist    : 'dist/css/',
-    jsmain     : 'assets/scripts/*.js',
-    jsdist     : 'dist/scripts/',
-    imagesmain : 'assets/images/*.*',
-    imagesdist : 'dist/images/',
-    proxy      : 'starter.dev'
+  csspath    : 'assets/css/',
+  cssmain    : 'assets/css/main.css',
+  cssdist    : 'dist/css/',
+  jsmain     : 'assets/scripts/*.js',
+  jsdist     : 'dist/scripts/',
+  imagesmain : 'assets/images/*.*',
+  imagesdist : 'dist/images/',
+  proxy      : 'starter.dev'
 };
 
 const mode = envi({
@@ -32,46 +32,46 @@ const mode = envi({
 
 gulp.task('styles', () => {
     
-    let  processors = [
-            atImport,
-            posturl(),
-            cssnext(),
-            browserReport(),
-		        postReporter(),
-         ];
+  let  processors = [
+          atImport,
+          posturl(),
+          cssnext(),
+          browserReport(),
+	        postReporter(),
+       ];
 
-    let  processorsProd = [
-            atImport,
-            posturl(),
-            cssnext(),
-            browserReport(),
-            postReporter(),
-            cssnano()
-         ];
-    
-    return gulp.src(paths.cssmain)
-               .pipe(mode.production(postcss(processorsProd)) || postcss(processors))
-               .pipe(gulp.dest(paths.cssdist));
+  let  processorsProd = [
+          atImport,
+          posturl(),
+          cssnext(),
+          browserReport(),
+          postReporter(),
+          cssnano()
+       ];
+  
+  return gulp.src(paths.cssmain)
+             .pipe(mode.production(postcss(processorsProd)) || postcss(processors))
+             .pipe(gulp.dest(paths.cssdist));
     
 });
 
 gulp.task('scripts', () => {
     
-    return gulp.src(paths.jsmain)
-               .pipe(concat('all.js'))
-               .pipe(mode.production(minifyjs()))
-               .pipe(gulp.dest(paths.jsdist));
+  return gulp.src(paths.jsmain)
+             .pipe(concat('all.js'))
+             .pipe(mode.production(minifyjs()))
+             .pipe(gulp.dest(paths.jsdist));
     
 });
 
 gulp.task('images', () => {
 
 	let minifactor = [
-                         imagemin.gifsicle({interlaced: true}),
-                         imagemin.jpegtran({progressive: true}),
-                         imagemin.optipng({optimizationLevel: 5}),
-                         imagemin.svgo({plugins: [{removeViewBox: true}]})
-                     ];
+                       imagemin.gifsicle({interlaced: true}),
+                       imagemin.jpegtran({progressive: true}),
+                       imagemin.optipng({optimizationLevel: 5}),
+                       imagemin.svgo({plugins: [{removeViewBox: true}]})
+                   ];
 
 	return gulp.src(paths.imagesmain)
                .pipe(mode.production(imagemin(minifactor)))
