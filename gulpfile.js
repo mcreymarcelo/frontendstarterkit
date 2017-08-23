@@ -12,6 +12,10 @@ const envi          = require('gulp-mode');
 const minifyjs      = require('gulp-js-minify');
 const minifycss     = require('gulp-clean-css');
 
+const file          = require('gulp-file');
+const { rollup }    = require('rollup');
+const babel         = require('rollup-plugin-babel');
+
 const paths = {
   csspath    : 'assets/css/',
   cssmain    : 'assets/css/main.css',
@@ -49,10 +53,39 @@ gulp.task('styles', () => {
 
 gulp.task('scripts', () => {
     
-  return gulp.src(paths.jsmain)
+  /*return gulp.src(paths.jsmain)
              .pipe(concat('all.js'))
              .pipe(mode.production(minifyjs()))
-             .pipe(gulp.dest(paths.jsdist));
+             .pipe(gulp.dest(paths.jsdist));*/
+
+  return rollup({
+    entry: 'assets/scripts/main.js',
+    plugins: [
+      babel({
+        presets: [
+          [
+            'es2015', {
+              'modules': false
+            }
+          ]
+        ],
+        babelrc: false,
+        exclude: 'node_modules/**'
+      })
+    ]
+  })
+  .then( bundle => {
+    return bundle.generate({
+      format: 'umd',
+      moduleName: 'myModule'
+    })
+  })
+  .then( gen => {
+    return file( 'main.js', gen.code, { src: true })
+               .pipe(mode.production(minifyjs()))
+               .pipe( gulp.dest('dist/scripts/') )
+  });
+  
     
 });
 
