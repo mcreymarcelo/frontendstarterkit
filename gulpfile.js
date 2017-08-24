@@ -11,6 +11,7 @@ const postReporter  = require('postcss-reporter');
 const envi          = require('gulp-mode');
 const minifyjs      = require('gulp-js-minify');
 const minifycss     = require('gulp-clean-css');
+const clean         = require('gulp-clean');
 
 const file          = require('gulp-file');
 const { rollup }    = require('rollup');
@@ -20,6 +21,7 @@ const paths = {
   csspath    : 'assets/css/',
   cssmain    : 'assets/css/main.css',
   cssdist    : 'dist/css/',
+  jspath     : 'assets/scripts/',
   jsmain     : 'assets/scripts/*.js',
   jsdist     : 'dist/scripts/',
   imagesmain : 'assets/images/*.*',
@@ -52,14 +54,9 @@ gulp.task('styles', () => {
 });
 
 gulp.task('scripts', () => {
-    
-  /*return gulp.src(paths.jsmain)
-             .pipe(concat('all.js'))
-             .pipe(mode.production(minifyjs()))
-             .pipe(gulp.dest(paths.jsdist));*/
 
   return rollup({
-    entry: 'assets/scripts/main.js',
+    input: 'assets/scripts/main.js',
     plugins: [
       babel({
         presets: [
@@ -105,7 +102,15 @@ gulp.task('images', () => {
 });
 
 
-gulp.task('watch', () => {
+gulp.task('clean-build', () => {
+
+  return gulp.src('./dist', {read: false})
+             .pipe(clean());
+
+});
+
+
+gulp.task('watch', ['default'], () => {
 
   browserSync.init({
     files: ['**/*.html', '*.html'],
@@ -117,5 +122,4 @@ gulp.task('watch', () => {
 
 });
 
-
-gulp.task('default', ['styles', 'scripts', 'images']);
+gulp.task('default', ['clean-build', 'styles', 'scripts', 'images']);
