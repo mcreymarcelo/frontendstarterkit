@@ -1,21 +1,23 @@
 const gulp          = require('gulp');
 const postcss       = require('gulp-postcss');
-const posturl       = require("postcss-url")
-const cssnext       = require('postcss-cssnext');
-const atImport      = require('postcss-import');
-const browserSync   = require('browser-sync');
-const imagemin      = require('gulp-imagemin');
-const concat        = require('gulp-concat');
-const browserReport = require('postcss-browser-reporter');
-const postReporter  = require('postcss-reporter');
 const envi          = require('gulp-mode');
 const minifyjs      = require('gulp-js-minify');
 const minifycss     = require('gulp-clean-css');
 const clean         = require('gulp-clean');
 const sourcemaps    = require('gulp-sourcemaps');
 const file          = require('gulp-file');
+const imagemin      = require('gulp-imagemin');
+const concat        = require('gulp-concat');
+const posturl       = require("postcss-url")
+const cssnext       = require('postcss-cssnext');
+const atImport      = require('postcss-import');
+const browserReport = require('postcss-browser-reporter');
+const postReporter  = require('postcss-reporter');
+
 const { rollup }    = require('rollup');
 const babel         = require('rollup-plugin-babel');
+
+const browserSync   = require('browser-sync');
 
 const paths = {
   csspath    : 'assets/css/',
