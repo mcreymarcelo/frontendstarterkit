@@ -12,7 +12,7 @@ const envi          = require('gulp-mode');
 const minifyjs      = require('gulp-js-minify');
 const minifycss     = require('gulp-clean-css');
 const clean         = require('gulp-clean');
-
+const sourcemaps    = require('gulp-sourcemaps');
 const file          = require('gulp-file');
 const { rollup }    = require('rollup');
 const babel         = require('rollup-plugin-babel');
@@ -47,8 +47,10 @@ gulp.task('styles', () => {
        ];
 
   return gulp.src(paths.cssmain)
+             .pipe(mode.development(sourcemaps.init()))
              .pipe(postcss(processors))
              .pipe(mode.production(minifycss()))
+             .pipe(mode.development(sourcemaps.write('.')))
              .pipe(gulp.dest(paths.cssdist));
     
 });
@@ -122,4 +124,8 @@ gulp.task('watch', ['default'], () => {
 
 });
 
-gulp.task('default', ['clean-build', 'styles', 'scripts', 'images']);
+gulp.task('build', ['scripts', 'styles', 'images']);
+
+gulp.task('default', ['clean-build'], () => {
+  gulp.start('build');
+});

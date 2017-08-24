@@ -1,5 +1,5 @@
 rollup({
-  entry: 'assets/js/main.js',
+  input: 'assets/js/main.js',
   plugins: [
     babel({
       presets: [
