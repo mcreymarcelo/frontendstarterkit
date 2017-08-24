@@ -124,7 +124,7 @@ gulp.task('watch', ['default'], () => {
 
 });
 
-gulp.task('build', ['scripts', 'styles', 'images']);
+gulp.task('build', ['styles', 'scripts' , 'images']);
 
 gulp.task('default', ['clean-build'], () => {
   gulp.start('build');
