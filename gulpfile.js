@@ -8,7 +8,8 @@ const sourcemaps    = require('gulp-sourcemaps');
 const file          = require('gulp-file');
 const imagemin      = require('gulp-imagemin');
 const concat        = require('gulp-concat');
-const posturl       = require("postcss-url")
+
+const posturl       = require('postcss-url')
 const cssnext       = require('postcss-cssnext');
 const atImport      = require('postcss-import');
 const browserReport = require('postcss-browser-reporter');
